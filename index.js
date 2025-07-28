@@ -6,7 +6,9 @@
 const express = require('express');
 const app = express();                           // Create an instance of an Express application
 const PORT = 3000;                              // Define the port on which the server will listen
+const connectDB = require('./config/db');       // Import the database connection function
 
+connectDB();                                    // Connect to the MongoDB database using the connection function              
 
 // Enable JSON parsing for incoming requests
 app.use(express.json());
