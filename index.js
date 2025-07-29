@@ -2,8 +2,9 @@
 // This file sets up the Express server and routes for the application.
 
 
-// Import necessary modules
-const express = require('express');
+require('dotenv').config();                     // Load environment variables from .env file
+
+const express = require('express');              // Import the Express framework  
 const app = express();                           // Create an instance of an Express application
 const PORT = 3000;                              // Define the port on which the server will listen
 const connectDB = require('./config/db');       // Import the database connection function
