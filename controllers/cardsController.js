@@ -27,5 +27,28 @@ const createCard = async (req, res) => {
     }
 }
 
+// Delete a card
+const deleteCard = async (req, res) => {
+    try {
+        const deleted = await Card.findByIdAndDelete(req.params.id);            // Find and delete the card by ID
+        if (!deleted) return res.status(404).json({ message: 'Card not found' });      // If no card is found, return a 404 status with a message
+        res.status(200).json({ message: 'Card deleted successfully' }); // Return a success message with status 200
+    } catch (error) {
+        res.status(500).json({ message: 'Error deleting card', error: error.message }); // Handle errors and send a 500 status with error message
+    }
+};
+
+// Update a card
+const updateCard = async (req, res) => {
+    try {
+        const updated = await Card.findByIdAndUpdate(req.params.id, req.body, { new: true }); // Find the card by ID and update it with the request body, returning the updated card
+        if (!updated) return res.status(404).json({ message: 'Card not found' }); // If no card is found, return a 404 status with a message
+        res.status(200).json(updated); // Return the updated card as a JSON response with status 200
+    } catch (error) {
+        res.status(500).json({ message: 'Error updating card', error: error.message }); // Handle errors and send a 500 status with error message
+    }
+};
+
+
 // Exporting the functions to be used in the routes
-module.exports = {getAllCards, createCard};
+module.exports = {getAllCards, createCard, deleteCard, updateCard};
